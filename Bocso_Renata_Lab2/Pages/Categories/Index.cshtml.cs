@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Bocso_Renata_Lab2.Data;
 using Bocso_Renata_Lab2.Models;
 
-namespace Bocso_Renata_Lab2.Pages.Authors
+namespace Bocso_Renata_Lab2.Pages.Categories
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +19,13 @@ namespace Bocso_Renata_Lab2.Pages.Authors
             _context = context;
         }
 
-        public IList<Author> Authors { get;set; } = default!;
+        public IList<Category> Category { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Authors != null)
+            if (_context.Category != null)
             {
-                Authors = await _context.Authors.ToListAsync();
+                Category = await _context.Category.ToListAsync();
             }
         }
     }

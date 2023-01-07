@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Bocso_Renata_Lab2.Data;
 using Bocso_Renata_Lab2.Models;
 
-namespace Bocso_Renata_Lab2.Pages.Authors
+namespace Bocso_Renata_Lab2.Pages.Categories
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace Bocso_Renata_Lab2.Pages.Authors
         }
 
         [BindProperty]
-        public Author Authors { get; set; }
+        public Category Category { get; set; }
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -36,7 +36,7 @@ namespace Bocso_Renata_Lab2.Pages.Authors
                 return Page();
             }
 
-            _context.Authors.Add(Authors);
+            _context.Category.Add(Category);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

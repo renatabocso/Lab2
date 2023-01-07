@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Bocso_Renata_Lab2.Models
 {
-    public class Authors
+    public class Author
     {
         public int ID { get; set; }
 

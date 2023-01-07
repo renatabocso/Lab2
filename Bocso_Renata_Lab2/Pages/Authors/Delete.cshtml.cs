@@ -20,7 +20,7 @@ namespace Bocso_Renata_Lab2.Pages.Authors
         }
 
         [BindProperty]
-      public Models.Authors Authors { get; set; }
+      public Author Authors { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
