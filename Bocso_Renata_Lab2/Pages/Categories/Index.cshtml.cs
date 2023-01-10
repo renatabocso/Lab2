@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Bocso_Renata_Lab2.Data;
 using Bocso_Renata_Lab2.Models;
+using Bocso_Renata_Lab2.Models.ViewModels;
 
 namespace Bocso_Renata_Lab2.Pages.Categories
 {
@@ -19,13 +20,35 @@ namespace Bocso_Renata_Lab2.Pages.Categories
             _context = context;
         }
 
-        public IList<Category> Category { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public IList<Category> Category { get; set; } = default!;
+        public CategoryIndexData CategoryData { get; set; }
+        public int CategoryID { get; set; }
+        public int BookID { get; set; }
+        public async Task OnGetAsync(int? id, int? bookID)
         {
+            CategoryData = new CategoryIndexData();
+
             if (_context.Category != null)
             {
                 Category = await _context.Category.ToListAsync();
+            }
+      
+            if (id != null)
+            {
+                var bookCategories = await _context.Book.
+                Include(i => i.BookCategories)
+                .ThenInclude(i => i.Book)
+                .ThenInclude(i => i.Author)
+                .SelectMany(s => s.BookCategories)
+                .ToListAsync();
+
+                CategoryData.BookCategories = new List<BookCategory> {bookCategories
+                    .FirstOrDefault(w => w.CategoryID == id.Value) };
+                CategoryID = id.Value;
+                CategoryData.Books = bookCategories
+                .Where(i => i.CategoryID == id.Value)
+                .Select(s => s.Book)
+                .ToList();
             }
         }
     }

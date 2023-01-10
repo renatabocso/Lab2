@@ -2,5 +2,8 @@
 {
     public class CategoryIndexData
     {
+        public IEnumerable<BookCategory> BookCategories { get; set; }
+        public IEnumerable<Book> Books { get; set; }
+
     }
 }
